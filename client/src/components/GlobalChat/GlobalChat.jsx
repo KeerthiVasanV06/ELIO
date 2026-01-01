@@ -50,10 +50,12 @@ const GlobalChat = () => {
     // Removed isAuthenticated check
     
     setIsLoading(true);
-    const wsUrl = import.meta.env.VITE_WS_URL || "ws://localhost:5000";
+    const wsUrl = import.meta.env.VITE_WS_URL;
     
     try {
-      ws.current = new WebSocket(`${wsUrl}/chat?userId=${currentUserId}&userName=${currentUserName}`);
+      ws.current = new WebSocket(
+        `${wsUrl}/chat?userId=${currentUserId}&userName=${encodeURIComponent(currentUserName)}`
+      );
 
       ws.current.onopen = () => {
         console.log("WebSocket connected");
@@ -99,24 +101,27 @@ const GlobalChat = () => {
         setIsLoading(false);
       };
 
-      ws.current.onclose = () => {
-        console.log("WebSocket disconnected");
-        setIsConnected(false);
-        setIsLoading(false);
+ws.current.onclose = () => {
+  console.log("WebSocket disconnected");
+  setIsConnected(false);
+  setIsLoading(false);
 
-        // Attempt to reconnect
-        if (reconnectAttempts.current < maxReconnectAttempts) {
-          reconnectAttempts.current += 1;
-          setTimeout(() => {
-            console.log(`Reconnecting... Attempt ${reconnectAttempts.current}`);
-            connectWebSocket();
-          }, 2000 * reconnectAttempts.current);
-        }
-      };
+  if (ws.current) {
+    ws.current = null;
+  }
+
+  if (reconnectAttempts.current < maxReconnectAttempts) {
+    reconnectAttempts.current += 1;
+    setTimeout(() => {
+      if (!ws.current) {
+        connectWebSocket();
+      }
+    }, 2000 * reconnectAttempts.current);
+  }
+};
     } catch (err) {
-      console.error("Failed to create WebSocket:", err);
+      console.error("WebSocket connection failed:", err);
       setIsLoading(false);
-      setIsConnected(false);
     }
   };
 
