@@ -1,0 +1,232 @@
+/* Admin Layout */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--background);
+  font-family: inherit;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 280px;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: white;
+  padding: 0;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.admin-logo {
+  padding: var(--space-2xl) var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.admin-logo h2 {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.5px;
+}
+
+.admin-subtitle {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Admin Nav */
+.admin-nav {
+  padding: var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  border-left: 3px solid transparent;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.nav-link:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--color-primary-600);
+}
+
+.nav-link.active {
+  color: white;
+  background-color: rgba(30, 58, 138, 0.2);
+  border-left-color: var(--color-primary-600);
+}
+
+.nav-icon {
+  font-size: var(--font-size-lg);
+}
+
+/* Main Content */
+.admin-main {
+  margin-left: 280px;
+  flex: 1;
+  padding: var(--space-2xl);
+  min-height: 100vh;
+}
+
+.admin-content {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Scrollbar styling */
+.admin-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .admin-sidebar {
+    width: 240px;
+  }
+
+  .admin-main {
+    margin-left: 240px;
+    padding: var(--space-lg);
+  }
+
+  .admin-content {
+    padding: var(--space-lg);
+  }
+
+  .admin-logo {
+    padding: var(--space-lg);
+  }
+
+  .admin-logo h2 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 200px;
+  }
+
+  .admin-main {
+    margin-left: 200px;
+    padding: var(--space-md);
+  }
+
+  .admin-content {
+    padding: var(--space-md);
+  }
+
+  .nav-link {
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-sm);
+    font-size: var(--font-size-xs);
+  }
+
+  .nav-icon {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-bottom: 2px solid var(--border-light);
+  }
+
+  .admin-main {
+    margin-left: 0;
+    padding: var(--space-md);
+  }
+
+  .admin-content {
+    padding: var(--space-md);
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    padding: var(--space-md) var(--space-lg);
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    flex: 1;
+    min-width: 120px;
+    justify-content: center;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    padding: var(--space-sm);
+    text-align: center;
+    gap: var(--space-xs);
+    flex-direction: column;
+    font-size: var(--font-size-xs);
+  }
+
+  .nav-link:hover {
+    border-left: none;
+    border-bottom-color: var(--color-primary-600);
+  }
+
+  .nav-link.active {
+    border-left: none;
+    border-bottom-color: var(--color-primary-600);
+  }
+
+  .nav-icon {
+    font-size: var(--font-size-xl);
+  }
+
+  .admin-logo {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .admin-logo h2 {
+    font-size: var(--font-size-base);
+  }
+
+  .admin-subtitle {
+    display: none;
+  }
+}

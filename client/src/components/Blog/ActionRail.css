@@ -1,0 +1,260 @@
+/* ========================================
+   ACTION RAIL - LIKE, BOOKMARK, SHARE BUTTONS
+   Modern Premium Design
+======================================== */
+
+.action-rail {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+  width: fit-content;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--border-light);
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: var(--font-size-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gradient overlay on hover */
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  border-radius: var(--radius-xl);
+}
+
+.action-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.action-btn:hover:not(:disabled) {
+  border-color: var(--color-primary-300);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+  transform: translateY(-3px);
+}
+
+.action-btn:active:not(:disabled) {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Like Button Styles */
+.action-btn.like-btn {
+  position: relative;
+}
+
+.action-btn.like-btn.liked {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border-color: #ef4444;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.action-btn.like-btn.liked::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  opacity: 1;
+}
+
+.action-btn.like-btn.liked:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  border-color: #dc2626;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Bookmark Button Styles */
+.action-btn.bookmark-btn.bookmarked {
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  border-color: #14b8a6;
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+}
+
+.action-btn.bookmark-btn.bookmarked::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  opacity: 1;
+}
+
+.action-btn.bookmark-btn.bookmarked:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+  border-color: #0d9488;
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Share Button Styles */
+.action-btn.share-btn:hover:not(:disabled) {
+  border-color: var(--color-accent-400);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.15);
+}
+
+/* Icon Styles */
+.action-btn .icon {
+  font-size: 1.5rem;
+  transition: all var(--transition-base);
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.action-btn.like-btn.liked .icon,
+.action-btn.bookmark-btn.bookmarked .icon {
+  color: #ffffff;
+}
+
+.action-btn:hover:not(:disabled) .icon {
+  transform: scale(1.15);
+}
+
+.action-btn.like-btn.liked:hover:not(:disabled) .icon {
+  animation: heartBeat 0.6s ease-in-out;
+}
+
+/* Count Styles */
+.action-btn .count {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-secondary);
+  min-height: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.action-btn.like-btn.liked .count,
+.action-btn.bookmark-btn.bookmarked .count {
+  color: #ffffff;
+  font-weight: var(--font-weight-extrabold);
+}
+
+/* Heart Beat Animation */
+@keyframes heartBeat {
+
+  0%,
+  100% {
+    transform: scale(1.15);
+  }
+
+  25% {
+    transform: scale(1.3);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.action-btn.like-btn.liked .count {
+  color: #ffffff;
+  font-weight: var(--font-weight-bold);
+}
+
+/* ========================================
+   TOAST NOTIFICATIONS
+======================================== */
+
+.toast {
+  position: fixed;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-notification);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  animation: slideUp var(--transition-base);
+  max-width: 90%;
+}
+
+/* Use slideUp from global.css */
+
+.toast-success {
+  background: var(--surface-primary);
+  color: var(--color-success);
+  border: 1px solid var(--border-light);
+}
+
+.toast-error {
+  background: var(--surface-primary);
+  color: var(--color-danger);
+  border: 1px solid var(--border-light);
+}
+
+.toast-info {
+  background: var(--surface-primary);
+  color: var(--color-info);
+  border: 1px solid var(--border-light);
+}
+
+.toast-message {
+  word-break: break-word;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .action-rail {
+    flex-direction: row;
+    gap: var(--space-sm);
+    justify-content: flex-start;
+  }
+
+  .action-btn {
+    width: 48px;
+    height: 48px;
+    font-size: var(--font-size-lg);
+  }
+
+  .action-btn .icon {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* ========================================
+   DARK MODE SUPPORT
+======================================== */
+[data-theme='dark'] .action-btn {
+  background: var(--surface-secondary);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .action-btn:hover:not(:disabled) {
+  background: var(--surface-tertiary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='dark'] .toast-success,
+[data-theme='dark'] .toast-error,
+[data-theme='dark'] .toast-info {
+  background: var(--surface-secondary);
+  border-color: rgba(255, 255, 255, 0.1);
+}

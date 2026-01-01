@@ -1,0 +1,29 @@
+/* ========================================
+   CATEGORY SELECT - DROPDOWN SELECTOR
+======================================== */
+
+.category-select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-family-base);
+}
+
+.category-select:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.category-select:disabled {
+  background: var(--surface-tertiary);
+  cursor: not-allowed;
+  color: var(--text-muted);
+  opacity: 0.6;
+}

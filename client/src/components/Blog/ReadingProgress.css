@@ -1,0 +1,14 @@
+/* ========================================
+   READING PROGRESS BAR
+======================================== */
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--color-primary-600), var(--color-accent-500));
+  z-index: var(--z-fixed);
+  transition: width var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+}

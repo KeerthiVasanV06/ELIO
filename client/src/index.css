@@ -1,0 +1,5 @@
+/* 
+  Main stylesheet - imports global design system 
+  Global styles are defined in src/styles/global.css
+*/
+@import "./styles/global.css";
