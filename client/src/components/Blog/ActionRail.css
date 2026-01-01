@@ -19,18 +19,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 64px;
-  height: 64px;
-  border: 2px solid var(--border-light);
-  background: var(--surface-primary);
-  border-radius: var(--radius-xl);
+  justify-content: flex-start;
+  gap: 0px;
+  width: auto;
+  height: auto;
+  border: none;
+  background: transparent;
+  border-radius: 0;
   cursor: pointer;
   transition: all var(--transition-base);
   font-size: var(--font-size-xl);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  font-weight: 600;
+  padding: 0;
 }
 
 /* Subtle gradient overlay on hover */
@@ -41,10 +43,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
   opacity: 0;
   transition: opacity var(--transition-base);
-  border-radius: var(--radius-xl);
 }
 
 .action-btn:hover:not(:disabled)::before {
@@ -52,9 +52,7 @@
 }
 
 .action-btn:hover:not(:disabled) {
-  border-color: var(--color-primary-300);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
-  transform: translateY(-3px);
+  transform: scale(1.1);
 }
 
 .action-btn:active:not(:disabled) {
@@ -69,49 +67,203 @@
 /* Like Button Styles */
 .action-btn.like-btn {
   position: relative;
+  background: transparent;
+  border: none;
+  color: #667eea;
+}
+
+.action-btn.like-btn:hover:not(:disabled) {
+  transform: scale(1.15);
 }
 
 .action-btn.like-btn.liked {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  border-color: #ef4444;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-}
-
-.action-btn.like-btn.liked::before {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  opacity: 1;
+  color: #ff6b6b;
+  animation: likeButtonPulse 0.6s ease-out;
 }
 
 .action-btn.like-btn.liked:hover:not(:disabled) {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  border-color: #dc2626;
-  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-  transform: translateY(-3px);
+  transform: scale(1.2);
+}
+/* Icon Wrapper - For better animations */
+.action-btn .icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.action-btn .heart-icon {
+  font-size: 1.5 rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.action-btn.like-btn.liked .heart-icon {
+  animation: heartPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 4px 8px rgba(255, 107, 107, 0.4));
+}
+
+.action-btn:hover:not(:disabled) .heart-icon {
+  transform: scale(1.2);
+}
+
+/* Heart Glow Effect */
+.heart-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.4) 0%, transparent 70%);
+  animation: glowPulse 0.8s ease-out;
+  pointer-events: none;
+}
+
+/* Pulse Ring Effect */
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 107, 107, 0.8);
+  border-radius: 50%;
+  animation: expandPulse 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+/* Count Styles */
+.action-btn .count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  min-height: 18px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.action-btn.like-btn .count {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.action-btn.like-btn.liked .count {
+  animation: countPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ========== ANIMATIONS ========== */
+
+/* Heart Pop - Main Like Animation */
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Glow Pulse */
+@keyframes glowPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Expand Pulse */
+@keyframes expandPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Count Pop */
+@keyframes countPop {
+  0% {
+    transform: scale(0.8) translateY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.15) translateY(-4px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Like Button Pulse */
+@keyframes likeButtonPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Old Heart Beat kept for hover */
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1.2);
+  }
+  25% {
+    transform: scale(1.35);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 /* Bookmark Button Styles */
-.action-btn.bookmark-btn.bookmarked {
-  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
-  border-color: #14b8a6;
-  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+.action-btn.bookmark-btn {
+  background: transparent;
+  border: none;
+  color: #667eea;
 }
 
-.action-btn.bookmark-btn.bookmarked::before {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  opacity: 1;
+.action-btn.bookmark-btn.bookmarked {
+  background: transparent;
+  border: none;
+  color: #14b8a6;
+}
+
+.action-btn.bookmark-btn:hover:not(:disabled) {
+  transform: scale(1.15);
 }
 
 .action-btn.bookmark-btn.bookmarked:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
-  border-color: #0d9488;
-  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
-  transform: translateY(-3px);
+  transform: scale(1.15);
 }
 
 /* Share Button Styles */
+.action-btn.share-btn {
+  background: transparent;
+  border: none;
+  color: #667eea;
+}
+
 .action-btn.share-btn:hover:not(:disabled) {
-  border-color: var(--color-accent-400);
-  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.15);
+  transform: scale(1.15);
 }
 
 /* Icon Styles */
@@ -123,55 +275,23 @@
   z-index: 1;
 }
 
-.action-btn.like-btn.liked .icon,
-.action-btn.bookmark-btn.bookmarked .icon {
-  color: #ffffff;
-}
-
-.action-btn:hover:not(:disabled) .icon {
-  transform: scale(1.15);
-}
-
-.action-btn.like-btn.liked:hover:not(:disabled) .icon {
-  animation: heartBeat 0.6s ease-in-out;
-}
-
 /* Count Styles */
 .action-btn .count {
-  font-size: var(--font-size-xs);
+  font-size: 0.7rem;
   font-weight: var(--font-weight-bold);
-  color: var(--text-secondary);
-  min-height: 16px;
+  color: #667eea;
+  min-height: 14px;
+  line-height: 1;
   position: relative;
   z-index: 1;
 }
 
-.action-btn.like-btn.liked .count,
-.action-btn.bookmark-btn.bookmarked .count {
-  color: #ffffff;
-  font-weight: var(--font-weight-extrabold);
-}
-
-/* Heart Beat Animation */
-@keyframes heartBeat {
-
-  0%,
-  100% {
-    transform: scale(1.15);
-  }
-
-  25% {
-    transform: scale(1.3);
-  }
-
-  50% {
-    transform: scale(1.15);
-  }
-}
-
 .action-btn.like-btn.liked .count {
-  color: #ffffff;
-  font-weight: var(--font-weight-bold);
+  color: #ff6b6b;
+}
+
+.action-btn.bookmark-btn.bookmarked .count {
+  color: #14b8a6;
 }
 
 /* ========================================
@@ -243,13 +363,13 @@
    DARK MODE SUPPORT
 ======================================== */
 [data-theme='dark'] .action-btn {
-  background: var(--surface-secondary);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: transparent;
+  border: none;
 }
 
 [data-theme='dark'] .action-btn:hover:not(:disabled) {
-  background: var(--surface-tertiary);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: transparent;
+  border: none;
 }
 
 [data-theme='dark'] .toast-success,

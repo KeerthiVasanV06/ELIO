@@ -101,7 +101,6 @@ const ActionRail = ({ blogId, likes = 0, onLike }) => {
           text: "I found an interesting blog post",
           url: window.location.href,
         });
-        showToast("Blog shared successfully!", "success");
       } catch (err) {
         if (err.name !== "AbortError") {
           console.error("Share failed:", err);
@@ -150,8 +149,12 @@ const ActionRail = ({ blogId, likes = 0, onLike }) => {
           disabled={loading}
           title={liked ? "Unlike" : "Like"}
         >
-          <span className="icon">{liked ? "❤️" : "🤍"}</span>
+          <span className="icon-wrapper">
+            <span className="heart-icon">{liked ? "❤️" : "🤍"}</span>
+            {liked && <span className="heart-glow"></span>}
+          </span>
           <span className="count">{likeCount}</span>
+          {liked && <span className="pulse-ring"></span>}
         </button>
         <button 
           className="action-btn share-btn" 

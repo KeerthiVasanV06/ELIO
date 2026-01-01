@@ -1,10 +1,8 @@
 import loadEnv from "./config/env.js";
 import connectDB from "./config/db.js";
 import app from "./app.js";
-import dotenv from "dotenv";
 import http from "http";
 import { WebSocketServer } from "ws";
-dotenv.config();
 
 loadEnv();
 
